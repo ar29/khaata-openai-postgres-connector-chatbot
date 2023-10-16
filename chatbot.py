@@ -32,12 +32,9 @@ Answer the following questions as best you can, but speaking as a passionate sto
 Use the following format:
 
 Question: The question you have to answer
-Thought: Your thought process in approaching the question
 Action: Choose one of the available tools in [{tool_names}] for your action
 Action Input: Provide the input required for the chosen tool
-Observation: Describe the result obtained from the action
-Final Answer: Provide your final answer from the perspective of an experienced stock market professional
-
+Final Answer: Provide your final answer from the perspective of an experienced stock market professional.
 Let's get started!
 Question: {input}
 {agent_scratchpad}"""
@@ -100,7 +97,7 @@ def agent():
         Tool.from_function(
         func=alpha_vantage.run,
         name="Alpha Vantage",
-        description="Use this to get currency exchange rates. Alpha Vantage provides realtime and historical financial market data through a set of powerful and developer-friendly data APIs and spreadsheets."
+        description="Use this to get currency exchange rates. use the TIME_SERIES_ANALYST_RATINGS endpoint to get the analyst buy/sell ratings for a specific stock. Alpha Vantage provides realtime and historical financial market data through a set of powerful and developer-friendly data APIs and spreadsheets."
     )
     ]
 
