@@ -11,6 +11,33 @@ chainlit run chatbot.py --port 8001
 # Information
 1. LLM used - LLama2 hosted on Baseten
 
+# Test Plan
+
+I have integrated ChatGPT with fintech APIs, with example prompts and responses, using LangChain, Alpha Vantage API, and Llama2 LLM.
+
+Please find the github repository below with my code and execution instructions. https://github.com/ar29/demo-bind
+
+Example prompts and responses - 
+
+1.
+
+1. User | 18:43:13 | what is the current stock price of INFY?
+Chatbot |18:43:17 | According to the latest data from Alpha Vantage, the current stock price of Infosys Limited (INFY) is $13.45 USD per share.
+2. 
+
+User | 18:44:43 | What is the analyst buy/sell rating for INFY?
+Chatbot | 18:44:51 |Based on the latest analysis from various financial institutions, the consensus buying rating for Infosys Ltd. (INFY) is currently neutral with a target price range of $12-$14 per share. It's important to note that these ratings may change over time and may differ among analysts, so it's always advisable to consult multiple sources before making investment decisions.
+3.
+
+User | 18:45:55 | what is the stock price of goog?
+Chatbot | 18:46:00 | According to Alpha Vantage, the current intraday quote for Google (GOOGL) is $1342.50 USD per share.
+4.
+
+User | 18:46:21 | what is the historical performance of NASDAQ?
+Chatbot | 18:46:28 | Based on the historical data retrieved from Alpha Vantage, the NASDAQ Composite Index has shown a strong upward trend over the past few decades, with some notable fluctuations along the way. Here are some key statistics:
+As of March 2023, the all-time high of the NASDAQ Composite Index was reached in February 2023, at around 14,500 points.
+Since its inception in 1971, the NASDAQ Composite Index has grown.
+
 
 # Code Description
 ```
