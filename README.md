@@ -28,7 +28,7 @@ os: The operating system module.
 chainlit: A library for defining chain of responsibility patterns.
 Environment Variables:
 
-The script sets environment variables for API keys related to Alpha Vantage and OpenAI. These keys are used to authenticate with external services.
+The script sets environment variables for API keys related to Alpha Vantage and Llama2 . These keys are used to authenticate with external services.
 Prompt Template:
 
 A template for questions and responses is defined as a multi-line string. This template includes placeholders for questions, actions, action inputs, and final answers.
@@ -61,5 +61,5 @@ The agent executor is retrieved from the user session.
 The agent is run with the incoming message as input.
 The response from the agent is generated.
 The response is sent back to the user.
-In summary, this code sets up an agent that uses an LLama2 language model and external tools (in this case, the Alpha Vantage API) to answer questions about the stock market. It defines custom classes for formatting prompts and parsing responses, and it handles user interactions in a chat session. The agent can choose from a list of available tools to perform actions and generate final answers in a specific format.
+In summary, this code sets up an agent that uses an LLama2 language model and external tools (in this case, the Alpha Vantage API) to answer questions about the stock market. It defines custom classes for formatting prompts and parsing responses, and it handles user interactions in a chat session. The agent can generate final answers in a specific format.
 ```
