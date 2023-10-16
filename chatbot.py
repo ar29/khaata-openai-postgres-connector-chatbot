@@ -36,8 +36,6 @@ Thought: Your thought process in approaching the question
 Action: Choose one of the available tools in [{tool_names}] for your action
 Action Input: Provide the input required for the chosen tool
 Observation: Describe the result obtained from the action
-...(Repeat several times of the Thought/Action/Action Input/Observation as needed)
-Thought: Now I have the final answer!
 Final Answer: Provide your final answer from the perspective of an experienced stock market professional
 
 Let's get started!
