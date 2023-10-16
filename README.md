@@ -63,5 +63,5 @@ This code is a Python script for creating a chatbot or agent that can answer que
      - The response from the agent is generated.
      - The response is sent back to the user.
 
-In summary, this code sets up an agent that uses a Llama2 language model and external tools (in this case, the Alpha Vantage API) to answer questions about the stock market. It defines custom classes for formatting prompts and parsing responses, and it handles user interactions in a chat session. The agent can choose from a list of available tools to perform actions and generate final answers in a specific format.
+In summary, this code sets up an agent that uses a Llama2 language model and external tools (in this case, the Alpha Vantage API) to answer questions about the stock market. It defines custom classes for formatting prompts and parsing responses, and it handles user interactions in a chat session. The agent can generate final answers in a specific format.
 ```
