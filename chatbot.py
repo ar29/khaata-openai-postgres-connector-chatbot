@@ -19,11 +19,6 @@ langchain.debug = True
 os.environ["ALPHAVANTAGE_API_KEY"] = "7MHWTAWCKY3TLYOF"
 
 
-
-
-
-os.environ["OPENAI_API_KEY"] = "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"
-
 template = """
 Answer the following questions as best you can, but speaking as a passionate stock market expert. You have access to the following tools:
 
