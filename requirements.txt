@@ -1,3 +1,4 @@
 langchain
-baseten
 chainlit
+openai
+psycopg2
