@@ -14,17 +14,17 @@ import psycopg2
 from typing import Optional
 import chainlit as cl
 from dotenv import load_dotenv, find_dotenv
-from pydantic import BaseModel, Field
-
+# from pydantic.v1 import BaseModel
+from pydantic.v1 import BaseModel, Field
 
 _ = load_dotenv(find_dotenv()) # read local .env file
-os.environ["OPENAI_API_KEY"] = ""
-openai.api_key = ""
+os.environ["OPENAI_API_KEY"] = "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"
+openai.api_key = "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"
 
 
 # Define the input schema
 class SQLQueryInput(BaseModel):
-    sql_query: str = Field(..., description="SQL Query of the given input in natural language to fetch data for")
+    sql_query: str = (Field(..., description="SQL Query of the given input in natural language to fetch data for"))
 
 @tool(args_schema=SQLQueryInput)
 def run_sql_query(sql_query: float) -> dict:
@@ -42,7 +42,7 @@ def run_sql_query(sql_query: float) -> dict:
         'database': 'postgres',
         'user': 'postgres',
         'password': 'lol',
-        'port': 5432
+        'port': 5433
     }
 
     # Establish a connection to the PostgreSQL database
@@ -50,6 +50,8 @@ def run_sql_query(sql_query: float) -> dict:
 
     # Create a cursor object to interact with the database
     cursor = connection.cursor()
+
+    connection.set_session(readonly=True)
 
     # Execute the SQL query
     try:
@@ -94,30 +96,85 @@ def agent():
         You're given the schema for various tables in a relational database. 
         you will have to generate SQL queries that query for inputs given to you.
         If any syntax error or undefined function error is encountered, re run the query with alternate Postgres SQL syntax.
-        CREATE TABLE recipes (
-    recipe_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    title VARCHAR ( 255 ) UNIQUE NOT NULL,
-    body TEXT
-    ); 
+         
+        CREATE TABLE public.transactions_orderdetails (
+    id integer NOT NULL,
+    sku character varying(255) NOT NULL,
+    hsn character varying(255),
+    sku_description character varying(255) NOT NULL,
+    quantity integer NOT NULL,
+    shipment_id character varying(255) NOT NULL,
+    tax_exclusive_gross double precision NOT NULL,
+    principal_amount_basis double precision NOT NULL,
+    total_tax_amount double precision NOT NULL,
+    compensatory_cess_tax double precision NOT NULL,
+    cgst_rate double precision NOT NULL,
+    cgst_amount double precision NOT NULL,
+    sgst_rate double precision NOT NULL,
+    sgst_amount double precision NOT NULL,
+    igst_rate double precision NOT NULL,
+    igst_amount double precision NOT NULL,
+    tcs_cgst_rate double precision NOT NULL,
+    tcs_cgst_amount double precision NOT NULL,
+    tcs_sgst_rate double precision NOT NULL,
+    tcs_sgst_amount double precision NOT NULL,
+    tcs_utgst_rate double precision NOT NULL,
+    tcs_utgst_amount double precision NOT NULL,
+    tcs_igst_rate double precision NOT NULL,
+    tcs_igst_amount double precision NOT NULL,
+    shipping_amount_basis double precision NOT NULL,
+    shipping_promo_discount_basis double precision NOT NULL,
+    shipping_promo_tax double precision NOT NULL,
+    shipping_cgst_tax double precision NOT NULL,
+    shipping_sgst_tax double precision NOT NULL,
+    shipping_igst_tax double precision NOT NULL,
+    gift_wrap_amount_basis double precision NOT NULL,
+    gift_wrap_promo_discount_basis double precision NOT NULL,
+    gift_wrap_promo_tax double precision NOT NULL,
+    gift_wrap_cgst_tax double precision NOT NULL,
+    gift_wrap_sgst_tax double precision NOT NULL,
+    gift_wrap_igst_tax double precision NOT NULL,
+    item_promo_discount_basis double precision NOT NULL,
+    item_promo_tax double precision NOT NULL,
+    warehouse_id character varying(255),
+    updated timestamp with time zone NOT NULL,
+    created timestamp with time zone NOT NULL,
+    order_table_id integer NOT NULL,
+    line_item_id character varying(255) NOT NULL,
+    is_inactive boolean NOT NULL,
+    khaata_modified boolean NOT NULL
+);
         
-        CREATE TABLE recipes_photos (
-  photo_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  url VARCHAR(255) NOT NULL,
-  recipe_id INTEGER REFERENCES recipes(recipe_id) ON DELETE CASCADE
+        CREATE TABLE public.transactions_orders (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    order_id character varying(255) NOT NULL,
+    business_type character varying(255) NOT NULL,
+    seller_gstin character varying(255),
+    transaction_type character varying(255) NOT NULL,
+    invoice_number character varying(255) NOT NULL,
+    invoice_date date NOT NULL,
+    order_date date NOT NULL,
+    invoice_amount double precision NOT NULL,
+    ship_from_state character varying(255),
+    ship_to_state character varying(255),
+    credit_note_no character varying(255),
+    credit_note_date date,
+    customer_name character varying(255),
+    customer_phone character varying(255),
+    customer_address character varying(255),
+    customer_email character varying(255),
+    payment_method_code character varying(255),
+    updated timestamp with time zone NOT NULL,
+    created timestamp with time zone NOT NULL,
+    customer_country character varying(255),
+    customer_pincode character varying(255),
+    customer_state character varying(255),
+    dispatch_carrier character varying(255),
+    dispatch_date character varying(255),
+    dispatch_destination character varying(255),
+    dispatch_doc_no character varying(255)
 );
-         
-   CREATE TABLE ingredients (
-    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    title VARCHAR ( 255 ) UNIQUE NOT NULL
-    );
-         
-         CREATE TABLE recipe_ingredients (
-  recipe_id INTEGER REFERENCES recipes(recipe_id) ON DELETE NO ACTION,
-  ingredient_id INTEGER REFERENCES ingredients(id) ON DELETE NO ACTION,
-  CONSTRAINT recipe_ingredients_pk PRIMARY KEY (recipe_id, ingredient_id)
-);
-
-
     
     """),
         MessagesPlaceholder(variable_name="chat_history"),
